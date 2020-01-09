@@ -25,6 +25,13 @@ namespace BookShop.Controllers
             ViewBag.BookId = id ?? 0;
             return View();
         }
+        public string Square(int a, int h)
+        {
+            double s = a * h / 2.0;
+            return "<h2>Площадь треугольника с основанием " + a +
+                    " и высотой " + h + " равна " + s + "</h2>";
+        }
+
         [HttpPost]
         public string Buy(Purchase purchase)
         {
