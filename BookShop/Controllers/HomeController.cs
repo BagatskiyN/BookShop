@@ -9,7 +9,8 @@ namespace BookShop.Controllers
     public class HomeController : Controller
     {
         BookContext db = new BookContext();
-        public ActionResult Index()
+        
+      public ViewResult Index()
         {
             // получаем из бд все объекты Book
             IEnumerable<Book> books = db.Books;
@@ -18,10 +19,25 @@ namespace BookShop.Controllers
             // возвращаем представление
             return View();
         }
+        public ViewResult SomeMethod()
+        {
+            ViewBag.Head = "Привет мир!";
+            return View("SomeView");
+        }
+        public ActionResult About()
+        {
+            ViewData["Head"] = "Прив!";
+            return View();
+        }
+        
         [HttpGet]
 
         public ActionResult Buy(int? id)
         {
+            if (id > 3)
+            {
+                return Redirect("/Home/Index");
+            }
             ViewBag.BookId = id ?? 0;
             return View();
         }
@@ -31,7 +47,7 @@ namespace BookShop.Controllers
             return "<h2>Площадь треугольника с основанием " + a +
                     " и высотой " + h + " равна " + s + "</h2>";
         }
-
+      
         [HttpPost]
         public string Buy(Purchase purchase)
         {

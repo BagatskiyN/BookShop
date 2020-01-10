@@ -177,9 +177,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
+    <Content Include="Views\Home\SomeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Some\" />
     <Folder Include="Views\BookShop\" />
     <Folder Include="Views\My\" />
   </ItemGroup>

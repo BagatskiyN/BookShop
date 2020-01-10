@@ -22,5 +22,9 @@ namespace BookShop.Util
             fullHtmlCode += "</body></html>";
             context.HttpContext.Response.Write(fullHtmlCode);
         }
+        public ActionResult GetHtml()
+        {
+            return new HtmlResult("<h2>Привет мир!</h2>");
+        }
     }
 }
