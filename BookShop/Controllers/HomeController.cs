@@ -47,8 +47,29 @@ namespace BookShop.Controllers
             return "<h2>Площадь треугольника с основанием " + a +
                     " и высотой " + h + " равна " + s + "</h2>";
         }
-      
-        [HttpPost]
+      public FileResult GetFile()
+        {
+            string file_path = Server.MapPath("~/File/file.docx");
+            string file_type = "application/docx";
+            string file_name = "file.docx";
+            return File(file_path, file_type,file_name);
+        }
+        public string AboutBrowser()
+        {
+            string browser = HttpContext.Request.Browser.Browser;
+            string user_agent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referrer = HttpContext.Request.UrlReferrer == null ? "" : HttpContext.Request.UrlReferrer.AbsoluteUri;
+            return "<p>Browser: " + browser + "</p><p>User-Agent: " + user_agent + "</p><p>Url запроса: " + url +
+                "</p><p>Реферер: " + referrer + "</p><p>IP-адрес: " + ip + "</p>";
+
+
+        }
+
+
+
+            [HttpPost]
         public string Buy(Purchase purchase)
         {
             purchase.Date = DateTime.Now;
