@@ -133,6 +133,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookContext.cs" />
     <Compile Include="Models\BookDbInitializer.cs" />
@@ -141,6 +143,10 @@
     <Compile Include="Util\HtmlResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Bookstore.mdf" />
+    <Content Include="App_Data\Bookstore_log.ldf">
+      <DependentUpon>Bookstore.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -179,9 +185,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Buy.cshtml" />
     <Content Include="Views\Home\SomeView.cshtml" />
+    <Content Include="Views\Home\StrTipized.cshtml" />
+    <Content Include="Views\Home\Partial.cshtml" />
+    <Content Include="App_Code\MyHelpers.cshtml" />
+    <Content Include="Views\Home\BookView.cshtml" />
+    <Content Include="Views\Home\EditBook.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Some\" />
     <Folder Include="Views\BookShop\" />
     <Folder Include="Views\My\" />

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout=null;
+    Layout="~/Views/Shared/_Layout.cshtml";
 }
 <!DOCTYPE html>
 
@@ -31,5 +31,46 @@
             }
         </table>
     </div>
+    @using (Html.BeginForm())
+    {
+        @Html.ListBox("countries",
+                new MultiSelectList(new string[] { "Россия", "США", "Китай", "Индия" }))
+        <p><input type="submit" value="Отправить" /></p>
+    }
+    <form>
+        <input type="hidden" value="@ViewBag.BookId" name="BookId" />
+        <table>
+            <tr>
+                <td>
+                    <p>
+                        Введите свое имя
+                    </p>
+                </td>
+                <td><input type="text" name="Person" /> </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Введите адрес :
+                    </p>
+                </td>
+                <td>@Html.Password("UserPassword", "val") </td>
+
+            </tr>
+            <tr>
+                <td><input type="submit" value="Отправить" />
+                <td>
+                </td>
+
+            </tr>
+        </table>
+
+
+
+
+    </form>
 </body>
-</html>
+@section Footer {
+    Все права защищены. Syte Corp. 2012.
+}
+</html> 

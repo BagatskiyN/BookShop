@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookShop.Models;
+using System.Data.Entity;
+
 namespace BookShop.Controllers
 {
     public class HomeController : Controller
@@ -12,12 +14,95 @@ namespace BookShop.Controllers
         
       public ViewResult Index()
         {
+            ViewBag.Message = "Это вызов частичного представления из обычного";
+            ViewData["Head"] = new string[] { "USA", "Canada", "France" };
             // получаем из бд все объекты Book
             IEnumerable<Book> books = db.Books;
             // передаем все объекты в динамическое свойство Books в ViewBag
             ViewBag.Books = books;
             // возвращаем представление
             return View();
+        }
+        [HttpPost]
+        public string Index(string[] countries)
+        {
+            string result = "";
+            foreach (string c in countries)
+            {
+                result += c;
+                result += ";";
+            }
+            return "Вы выбрали: " + result;
+        }
+        [HttpGet]
+        public ActionResult EditBook(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Book book = db.Books.Find(id);
+            if (book != null)
+            {
+                return View(book);
+            }
+            return HttpNotFound();
+        }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Book book)
+        {
+            db.Entry(book).State = EntityState.Added;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+      [HttpGet]
+      public ActionResult Delete(int id)
+        {
+            Book b = db.Books.Find(id);
+            if(b==null)
+            {
+                return HttpNotFound();
+            }
+            return View(b);
+        }
+      [HttpPost, ActionName("Delete")]
+      public ActionResult DeleteConfirmed(int id)
+        {
+            Book b = db.Books.Find(id);
+            if(b==null)
+            {
+                return HttpNotFound();
+
+            }
+            db.Books.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+
+        [HttpPost]
+        public ActionResult EditBook(Book book)
+        {
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult BookView(int id)
+        {
+            Book book = db.Books.Where(p => p.Id == id).FirstOrDefault();
+            return View(book);
+
+        }
+        public ActionResult Partial()
+        {
+            ViewBag.Message = "Это частичное представление.";
+            return PartialView();
         }
         public ViewResult SomeMethod()
         {

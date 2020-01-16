@@ -1,0 +1,21 @@
+﻿@model BookShop.Models.Book
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BookView</title>
+</head>
+<body>
+    <div>
+    </div>
+
+
+    <h2>Книга № @Model.Id</h2>
+    @Html.DisplayForModel()
+</body>
+</html>
